@@ -1,0 +1,384 @@
+{
+	"info": {
+		"_postman_id": "a2363a3c-7a26-4111-9d81-4bd0e4e89393",
+		"name": "GKG",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Warmup",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Connection",
+						"value": "keep-alive"
+					},
+					{
+						"key": "Cache-Control",
+						"value": "max-age=0"
+					},
+					{
+						"key": "Upgrade-Insecure-Requests",
+						"value": "1"
+					},
+					{
+						"key": "User-Agent",
+						"value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/81.0.4044.138 Safari/537.36"
+					},
+					{
+						"key": "Accept",
+						"value": "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9"
+					},
+					{
+						"key": "Accept-Language",
+						"value": "en-US,en;q=0.9,und;q=0.8,gd;q=0.7"
+					},
+					{
+						"key": "Cookie",
+						"value": "deviceId=mijbsvsrt5.kn4kikmf71g.dv4h5vadra8; landingGroup=0"
+					},
+					{
+						"key": "If-None-Match",
+						"value": "\"c059d01c917d61:0\""
+					},
+					{
+						"key": "If-Modified-Since",
+						"value": "Tue, 21 Apr 2020 10:38:34 GMT"
+					}
+				],
+				"url": {
+					"raw": "http://test.v2.mykredit.com/",
+					"protocol": "http",
+					"host": [
+						"test",
+						"v2",
+						"mykredit",
+						"com"
+					],
+					"path": [
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "SendUserInfoForRegister",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "1ad0f1ed-2710-4325-958b-5912f1255b36",
+						"exec": [
+							"",
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"var jsonData = JSON.parse(responseBody);",
+							"var token = jsonData.data.token;",
+							"postman.setEnvironmentVariable(\"token\", token);",
+							"postman.setNextRequest()"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "5dd98f9f-1dae-4d43-b11a-ad34fa6481e6",
+						"exec": [
+							"pm.environment.set(\"randomNumber\", _.random(11111,99999))",
+							"",
+							"const uuid = require('uuid')",
+							" let email=uuid()+'@me.com'",
+							" pm.environment.set('email',email)",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Connection",
+						"value": "keep-alive"
+					},
+					{
+						"key": "Accept",
+						"value": "application/json, text/plain, */*"
+					},
+					{
+						"key": "X-App-Version",
+						"value": "2.0.556"
+					},
+					{
+						"key": "client-unique",
+						"value": "mijbsvsrt5.kn4kikmf71g.dv4h5vadra8"
+					},
+					{
+						"key": "Application",
+						"value": "MyKredit_ES"
+					},
+					{
+						"key": "Accept-Language",
+						"value": "es-ES"
+					},
+					{
+						"key": "User-Agent",
+						"value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/81.0.4044.138 Safari/537.36"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json;charset=UTF-8"
+					},
+					{
+						"key": "Origin",
+						"value": "http://test.v2.mykredit.com"
+					},
+					{
+						"key": "Referer",
+						"value": "http://test.v2.mykredit.com/registro/datos-personales"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"firstName\":\"murathandeneme\",\n\t\"lastName\":\"dene\",\n\t\"additionalField\":\"\",\n\t\"birthDate\":\"1988/12/02T12:00:00Z\",\n\t\"communication\":\n\t\t[\n\t\t\t{\n\t\t\t\"type\":\"email\",\n\t\t\t\"countryCode\":\"+34\",\n\t\t\t\"subType\":\"personal\",\n\t\t\t\"value\":\"{{email}}\"\n\t\t\t},\n\t\t\t{\n\t\t\t\"type\":\"phone\",\"countryCode\":\"+34\",\n\t\t\t\"subType\":\"personal\",\n\t\t\t\"value\":\"{{randomNumber}}0000\"\n\t\t\t}\n\t\t],\n\t\t\"isPingTreeCustomer\":false,\n\t\t\"pingTreeToken\":\"\",\n\t\t\"uId\":\"\",\n\t\t\"tryCount\":\"0\",\n\t\t\"landingGroup\":\"0\"\n}\n\n"
+				},
+				"url": {
+					"raw": "http://api.test.v2.mykredit.com/api/customer/customerx",
+					"protocol": "http",
+					"host": [
+						"api",
+						"test",
+						"v2",
+						"mykredit",
+						"com"
+					],
+					"path": [
+						"api",
+						"customer",
+						"customerx"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "EnterPin",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "bf743d7b-6a02-4e15-88e0-59ce0ead3f5b",
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "57c2f980-cf05-43d8-ab83-80cb21df3eb2",
+						"exec": [
+							"",
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"",
+							"pm.test(\"Check data status\", function () {",
+							"    pm.response.data===true;",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Connection",
+						"value": "keep-alive"
+					},
+					{
+						"key": "X-App-Version",
+						"value": "2.0.556"
+					},
+					{
+						"key": "client-unique",
+						"value": "mijbsvsrt5.kn4kikmf71g.dv4h5vadra8"
+					},
+					{
+						"key": "Accept-Language",
+						"value": "es-ES"
+					},
+					{
+						"key": "Authorization",
+						"value": "{{token}}",
+						"disabled": true
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json;charset=UTF-8"
+					},
+					{
+						"key": "Accept",
+						"value": "application/json, text/plain, */*"
+					},
+					{
+						"key": "User-Agent",
+						"value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/81.0.4044.138 Safari/537.36"
+					},
+					{
+						"key": "Application",
+						"value": "MyKredit_ES"
+					},
+					{
+						"key": "Origin",
+						"value": "http://test.v2.mykredit.com"
+					},
+					{
+						"key": "Referer",
+						"value": "http://test.v2.mykredit.com/registro/otp"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"pin\":\"0000\"}"
+				},
+				"url": {
+					"raw": "http://api.test.v2.mykredit.com/api/customer/setCustomerStatusToPreRegistered",
+					"protocol": "http",
+					"host": [
+						"api",
+						"test",
+						"v2",
+						"mykredit",
+						"com"
+					],
+					"path": [
+						"api",
+						"customer",
+						"setCustomerStatusToPreRegistered"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "CustomerUpdate",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Connection",
+						"value": "keep-alive"
+					},
+					{
+						"key": "X-App-Version",
+						"value": "2.0.556"
+					},
+					{
+						"key": "client-unique",
+						"value": "mijbsvsrt5.kn4kikmf71g.dv4h5vadra8"
+					},
+					{
+						"key": "Accept-Language",
+						"value": "es-ES"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJtaWQiOjEwMDAzMjkzLCJleHAiOjE1ODkxNzQ3MDksImlhdCI6MTU4OTEzMTUwOSwidmVyIjoxLCJyb2xlIjoxLCJpcCI6IjE3OC4yNDUuNjEuMjE2IiwiYXBwIjoyLCJsdmwiOjB9.6llt0DC0Uu2IGqngMBzrb1FZg8zogxqAxoqAxxAe35M"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json;charset=UTF-8"
+					},
+					{
+						"key": "Accept",
+						"value": "application/json, text/plain, */*"
+					},
+					{
+						"key": "User-Agent",
+						"value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/81.0.4044.138 Safari/537.36"
+					},
+					{
+						"key": "Application",
+						"value": "MyKredit_ES"
+					},
+					{
+						"key": "Origin",
+						"value": "http://test.v2.mykredit.com"
+					},
+					{
+						"key": "Referer",
+						"value": "http://test.v2.mykredit.com/registro/completar"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"gender\":\"Male\",\"employmentStatus\":\"fullTimeEmployed\",\"monthlyIncome\":\"20017\",\"position\":\"\",\"customerAddress\":[{\"addressType\":\"home\",\"companyName\":\"\",\"country\":\"Spain\",\"county\":\"deneme\",\"details\":\"\",\"district\":\"\",\"flatNumber\":\"asdasdasdasdasd\",\"houseNumber\":\"628449957\",\"postCode\":\"40003\",\"street\":\"abcdasdsada\",\"town\":\"Segovia\"},{\"addressType\":\"work\",\"building\":\"\",\"companyName\":\"deneme\",\"country\":\"\",\"county\":\"\",\"details\":\"\",\"district\":\"\",\"flatNumber\":\"\",\"houseNumber\":\"\",\"postCode\":\"\",\"street\":\"\",\"town\":\"\"}],\"communication\":[{\"type\":\"phone\",\"countryCode\":\"+34\",\"subType\":\"work\",\"value\":\"\"}]}"
+				},
+				"url": {
+					"raw": "http://api.test.v2.mykredit.com/api/customer/updateCustomerV2",
+					"protocol": "http",
+					"host": [
+						"api",
+						"test",
+						"v2",
+						"mykredit",
+						"com"
+					],
+					"path": [
+						"api",
+						"customer",
+						"updateCustomerV2"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "80d9b26f-491b-4471-a4ee-f7874d4f1de5",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "1f9d12e1-dd49-40d5-b2c6-a76a75b4bfa8",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"protocolProfileBehavior": {}
+}
