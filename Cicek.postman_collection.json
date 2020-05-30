@@ -1,0 +1,65 @@
+{
+	"info": {
+		"_postman_id": "9e8f0f5e-5baa-4854-a274-b1a6e49a3fd9",
+		"name": "Cicek",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "installment",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "84a6e325-d6b1-41c4-a9ba-1a51c0d6cd44",
+						"exec": [
+							"\r",
+							"var jsonData = pm.response.json();\r",
+							"pm.test(\"Check installment value of null \", function () {    \r",
+							"pm.response.to.be.json;\r",
+							"//console.log(jsonData.requests[0].responses[0].text);\r",
+							"console.log(jsonData.requests[0].responses);\r",
+							"pm.expect(jsonData.requests[0].responses[0].name).to.equal(\"Test_Installment_Is_Null\");\r",
+							"pm.expect(jsonData.requests[0].responses[0].text).to.equal(\"\");\r",
+							"pm.expect(jsonData.requests[0].responses[0].responseCode.code).to.equal(500);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Check installment value 1 \", function () {    \r",
+							"pm.expect(jsonData.requests[0].responses[1].name).to.equal(\"Test_Installment_True\");\r",
+							"\r",
+							"});\r",
+							"\r",
+							"\r",
+							"\r",
+							" \r",
+							" \r",
+							"  \r",
+							"\r",
+							" "
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://www.getpostman.com/collections/2edfab9c2e4e582a196e",
+					"protocol": "https",
+					"host": [
+						"www",
+						"getpostman",
+						"com"
+					],
+					"path": [
+						"collections",
+						"2edfab9c2e4e582a196e"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}
